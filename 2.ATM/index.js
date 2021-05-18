@@ -4,7 +4,6 @@
 // Print out current ballance "Current ballance is: 100"
 
 import { access, accessSync, readFileSync, writeFileSync } from 'fs';
-import { type } from 'os';
 
 import readline from 'readline';
 
