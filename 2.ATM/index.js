@@ -3,7 +3,7 @@
 // Asks for amount "How much? "
 // Print out current ballance "Current ballance is: 100"
 
-import { access, accessSync, readFileSync, writeFileSync } from 'fs';
+import { accessSync, readFileSync, writeFileSync } from 'fs';
 
 import readline from 'readline';
 
