@@ -4,6 +4,11 @@
 // Print out the name ex: "The new name is: Anna"
 // exit
 
+// To run to app write in terminal:
+// docker run -it --rm -v ${PWD}:/app/ node:alpine sh
+// cd app
+// node index.js
+
 import { accessSync, readFileSync, writeFileSync } from 'fs';
 
 import readline from 'readline';
@@ -14,25 +19,21 @@ const rl = readline.createInterface({
 });
 
 const filePath = `${process.cwd()}/name.json`;
-
-accessSync(filePath);
 const jsonObject = readFileSync(filePath, 'utf8');
-const decodedObject = JSON.parse(jsonObject);
-console.log(`The current name is: ${decodedObject.name}`);
-
-
-const changeName = (newName) => {
-    try {
-        decodedObject.name = newName;
+ 
+try {
+    accessSync(filePath);
+    const jsonObject = readFileSync(filePath, 'utf8');
+    const decodedObject = JSON.parse(jsonObject);
+    console.log(`The current name is: ${decodedObject.name}`);
+    
+    rl.question('Please enter a new name: ', (answer) => {
+        decodedObject.name = answer;
         writeFileSync(filePath, JSON.stringify(decodedObject));
-        console.log(`The new name is: ${newName}`);
-    } catch (err) {
-        console.error('Something went wrong', err);
-    }
- }
- 
- rl.question('Please enter a new name: ', (answer) => {
-    changeName(answer);
-    rl.close();
-})
- 
+        console.log(`The new name is: ${answer}`);
+        rl.close();
+    })
+} catch(err) {
+    console.error('Something went wrong', err);
+}
+
