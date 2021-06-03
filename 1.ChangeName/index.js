@@ -19,7 +19,6 @@ const rl = readline.createInterface({
 });
 
 const filePath = `${process.cwd()}/name.json`;
-const jsonObject = readFileSync(filePath, 'utf8');
  
 try {
     accessSync(filePath);
